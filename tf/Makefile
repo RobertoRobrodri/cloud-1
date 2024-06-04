@@ -2,6 +2,8 @@ TF_REPO := "https://github.com/tfutils/tfenv.git"
 TF_ENV_PATH := "$(HOME)/.tfenv"
 TF_VERSION := $(file < .terraform_version)
 TF_PATH := $(TF_ENV_PATH)/versions/$(TF_VERSION)
+TF_ENV := $(TF_ENV_PATH)/bin/tfenv
+TERRAFORM := $(TERRAFORM)
 
 usage:
 	@echo "Setup: Install tfenv"
@@ -18,19 +20,22 @@ setup:
 	fi
 
 install: setup
-	@$(TF_ENV_PATH)/bin/tfenv install $(TF_VERSION) && $(TF_ENV_PATH)/bin/tfenv use $(TF_VERSION)
+	@$(TF_ENV) install $(TF_VERSION) && $(TF_ENV) use $(TF_VERSION)
 
 uninstall:
-	@$(TF_ENV_PATH)/bin/tfenv uninstall $(TF_VERSION)
+	@$(TF_ENV) uninstall $(TF_VERSION)
 
 init: install
-	@$(TF_PATH)/terraform init
+	@$(TERRAFORM) init
 
-plan: init
-	@$(TF_PATH)/terraform plan
+plan: init format
+	@$(TERRAFORM) plan
 
-appy: init
-	@$(TF_PATH)/terraform apply
+apply: plan
+	@$(TERRAFORM) apply
 
 destroy: init
-	@$(TF_PATH)/terraform destroy
+	@$(TERRAFORM) destroy
+
+format:
+	@$(TERRAFORM) fmt -recursive
