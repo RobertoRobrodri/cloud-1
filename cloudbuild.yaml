@@ -1,0 +1,7 @@
+steps:
+# build
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'europe-west1-docker.pkg.dev/ply-plaform-353b/cloud-one-docker-images/IMAGE_NAME', '-f', 'DOCKERFILE_PATH', '.' ]
+# push
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'push', 'europe-west1-docker.pkg.dev/ply-plaform-353b/cloud-one-docker-images/IMAGE_NAME']

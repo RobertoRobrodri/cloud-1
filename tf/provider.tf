@@ -8,6 +8,6 @@ terraform {
 }
 
 provider "google" {
-  project = "" #! TODO activar el proyecto de gcp
-  region  = "europe-southwest1"
+  project = "ply-platform-353b"
+  region  = "europe-west1"
 }
