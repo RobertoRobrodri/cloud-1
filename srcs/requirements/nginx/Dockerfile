@@ -1,16 +1,13 @@
-# Set base image
-FROM alpine:3.17
+FROM debian:buster
 
-# Update apk and install mariadb package
-RUN apk update && apk add nginx
+RUN apt-get update \
+	&& apt-get install -y openssl \
+	&& apt-get install -y nginx
 
-# If this
-RUN ./conf/openssl/ssl.sh jalvarad.42.fr
+RUN openssl req -x509 -nodes -days 365 -subj "/C=CA/ST=QC/O=42Madrid, Inc./CN=robrodri.42.fr" -addext "subjectAltName=DNS:robrodri.42.fr" -newkey rsa:2048 -keyout /etc/ssl/private/robrodri.key -out /etc/ssl/certs/robrodri.crt
 
-COPY conf/openssl/jalvarad.42.fr.crt /etc/nginx/certs/server.crt
-COPY conf/openssl/jalvarad.42.fr.key /etc/nginx/certs/server.key
+RUN rm -rf /etc/nginx/sites-enabled/*
 
-# Copy default.conf
-COPY conf/default.conf /etc/nginx/http.d/
+COPY tools/default.conf /etc/nginx/conf.d/
 
-CMD ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
