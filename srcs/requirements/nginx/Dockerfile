@@ -5,7 +5,7 @@ FROM alpine:3.17
 RUN apk update && apk add nginx
 
 # If this
-RUN srcs/requirements/nginx/conf/openssl/ssl.sh jalvarad.42.fr
+RUN conf/openssl/ssl.sh jalvarad.42.fr
 
 COPY conf/openssl/jalvarad.42.fr.crt /etc/nginx/certs/server.crt
 COPY conf/openssl/jalvarad.42.fr.key /etc/nginx/certs/server.key
