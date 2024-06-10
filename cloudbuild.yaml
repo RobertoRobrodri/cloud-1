@@ -1,7 +1,20 @@
 steps:
+# WORDPRESS
 # build
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', 'europe-west1-docker.pkg.dev/ply-plaform-353b/cloud-one-docker-images/IMAGE_NAME', '-f', 'DOCKERFILE_PATH', '.' ]
+  args: [ 'build', '-t', 'europe-west1-docker.pkg.dev/ply-plaform-353b/cloud-one-docker-images/wordpress', '-f', 'srcs/requirements/wordpress/', '.' ]
 # push
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'push', 'europe-west1-docker.pkg.dev/ply-plaform-353b/cloud-one-docker-images/IMAGE_NAME']
+  args: [ 'push', 'europe-west1-docker.pkg.dev/ply-plaform-353b/cloud-one-docker-images/wordpress']
+# NGINX
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'europe-west1-docker.pkg.dev/ply-plaform-353b/cloud-one-docker-images/nginx', '-f', 'srcs/requirements/nginx/', '.' ]
+# push
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'push', 'europe-west1-docker.pkg.dev/ply-plaform-353b/cloud-one-docker-images/nginx']
+# MARIADB
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'europe-west1-docker.pkg.dev/ply-plaform-353b/cloud-one-docker-images/mariadb', '-f', 'srcs/requirements/mariadb/', '.' ]
+# push
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'push', 'europe-west1-docker.pkg.dev/ply-plaform-353b/cloud-one-docker-images/mariadb']
