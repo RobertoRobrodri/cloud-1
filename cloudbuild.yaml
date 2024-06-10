@@ -2,12 +2,12 @@ steps:
 # WORDPRESS
 # build
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', 'europe-west1-docker.pkg.dev/ply-platform-353b/cloud-one-docker-images/wordpress/', '.' ]
+  args: [ 'build', '-t', 'europe-west1-docker.pkg.dev/ply-platform-353b/cloud-one-docker-images/wordpress', '.' ]
   dir: 'srcs/requirements/wordpress'
   id: 'wordpress'
 # push
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'push', 'europe-west1-docker.pkg.dev/ply-platform-353b/cloud-one-docker-images/wordpress/']
+  args: [ 'push', 'europe-west1-docker.pkg.dev/ply-platform-353b/cloud-one-docker-images/wordpress']
   waitFor: ['wordpress']
 
 # NGINX
