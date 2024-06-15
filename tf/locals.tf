@@ -3,5 +3,7 @@
 #############################################################################
 locals {
     region = "europe-west1"
-    zone   = "europe-west1-a"
+    zone   = "europe-west1-b"
+    project_id = "ply-platform-353b"
+    source_dir = "../srcs"
 }
