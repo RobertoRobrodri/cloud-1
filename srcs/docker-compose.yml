@@ -68,9 +68,6 @@ services:
   phpmyadmin:
     container_name: phpmyadmin
     build: ./requirements/phpmyadmin
-    environment:
-      - PMA_HOST=mariadb
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     ports:
       - "8080:80"
     depends_on:

@@ -34,6 +34,7 @@ RUN wget https://files.phpmyadmin.net/phpMyAdmin/5.2.1/phpMyAdmin-5.2.1-all-lang
 
 COPY start.sh /start.sh
 COPY phpmyadmin.conf /etc/apache2/conf.d/phpmyadmin.conf
+COPY config.inc.php /var/www/phpmyadmin/config.inc.php
 # Expose port 80
 EXPOSE 80
 
