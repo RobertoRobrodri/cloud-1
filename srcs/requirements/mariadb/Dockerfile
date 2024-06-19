@@ -2,14 +2,14 @@
 FROM alpine:3.17
 
 # Update apk and install mariadb package
-RUN apk update && apk add mariadb
+RUN apk update && apk add mysql mysql-client
 
 # Create directory for SQL Scripts
 RUN mkdir /scripts
 
 # Copy database setup script and maraiadb config
 COPY tools/database_setup.sh /scripts
-COPY ./conf/my.cnf /etc/my.cnf.d/mariadb-server.cnf
+COPY ./conf/my.cnf /etc/mysql/my.cnf
 
 # Init database
 # https://mariadb.com/kb/en/mariadb-install-db/
