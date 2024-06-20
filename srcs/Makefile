@@ -13,7 +13,7 @@
 
 SERVER_NAME=jalvarad.42.fr
 # Directory where SSL certificates are located
-SSL_DIR=srcs/requirements/nginx/conf/openssl
+SSL_DIR=requirements/nginx/conf/openssl
 
 # SSL certificates
 SSL_CERTS=$(SSL_DIR)/$(SERVER_NAME).crt $(SSL_DIR)/$(SERVER_NAME).key
@@ -24,33 +24,33 @@ all: ssl up
 ssl: $(SSL_CERTS)
 
 $(SSL_DIR)/%.crt $(SSL_DIR)/%.key:
-	cd srcs/requirements/nginx/conf/openssl && ./ssl.sh $(SERVER_NAME)
+	cd requirements/nginx/conf/openssl && chmod 777 ssl.sh && ./ssl.sh $(SERVER_NAME)
 
 # Build the Docker Compose services
 build:
-	docker compose -f srcs/docker-compose.yml build --no-cache
+	docker compose -f docker-compose.yml build --no-cache
 
 # Start the Docker Compose services
 up:
 	mkdir -p ./data/mariadb
 	mkdir -p ./data/wordpress
-	docker compose -f srcs/docker-compose.yml up -d
+	docker compose -f docker-compose.yml up -d
 
 # Stop the Docker Compose services
 stop:
-	docker compose -f srcs/docker-compose.yml stop
+	docker compose -f docker-compose.yml stop
 
 # Restart the Docker Compose services
 restart:
-	docker compose -f srcs/docker-compose.yml restart
+	docker compose -f docker-compose.yml restart
 
 # Destroy the Docker Compose services
 destroy:
-	docker compose -f srcs/docker-compose.yml down --rmi all
+	docker compose -f docker-compose.yml down --rmi all
 
 # Clean up Docker
 clean:
-	docker compose -f srcs/docker-compose.yml down --rmi all
+	docker compose -f docker-compose.yml down --rmi all
 	docker volume rm mariadb wordpress
 	docker system prune -f
 	rm -rf data

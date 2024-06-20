@@ -2,6 +2,18 @@
 #                                MAIN                                       #
 #############################################################################
 # crear vm
+resource "google_service_account" "cloud_one_sa" {
+  account_id   = "cloud-one"
+  display_name = "cloud-one"
+}
+
+
+resource "google_project_iam_member" "project" {
+  project  = local.project_id
+  role     = "roles/storage.admin"
+  member   = "serviceAccount:${google_service_account.cloud_one_sa.email}"
+}
+
 resource "google_compute_instance" "cloud_one_vm" {
   name        = "cloud-1"
   zone        = local.zone
@@ -28,17 +40,13 @@ resource "google_compute_instance" "cloud_one_vm" {
     }
   }
 
-    metadata_startup_script = "cd srcs && docker compose up -d"
-    # connection {
-    #     type        = "ssh"
-    #     user        =  "roberto.rodriguez@paack.co"
-    #     private_key = file("~/.ssh/id_rsa")
-    #     host        = self.network_interface[0].access_config[0].nat_ip
-    #   }
-    # provisioner "file" {
-    #   source      = "../srcs"
-    #   destination = "."
-    # }
+    metadata_startup_script = file("../start-up.sh")
+    service_account {
+    # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
+      email  = resource.google_service_account.cloud_one_sa.email
+      scopes = ["cloud-platform"]
+  }
+    depends_on = [ resource.google_storage_bucket_object.inception_files ]
 }
 
 # Cloud storage bucket 
