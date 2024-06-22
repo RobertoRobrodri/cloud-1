@@ -14,7 +14,7 @@ COPY ./conf/my.cnf /etc/mysql/my.cnf
 # Init database
 # https://mariadb.com/kb/en/mariadb-install-db/
 RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql
-
+RUN chmod 777 /scripts/database_setup.sh
 # Expose port for MariaDB
 EXPOSE 3306
 
