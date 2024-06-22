@@ -18,7 +18,7 @@ resource "google_compute_instance" "cloud_one_vm" {
   name        = "cloud-1"
   zone        = local.zone
 
-  machine_type         = "f1-micro"
+  machine_type         = "n2-standard-2"
 
   scheduling {
     automatic_restart   = true
