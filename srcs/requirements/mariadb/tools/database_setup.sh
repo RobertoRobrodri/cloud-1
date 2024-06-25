@@ -18,7 +18,7 @@ GRANT ALL ON ${DATABASE_NAME}.* TO '${MARIADB_USER}'@'%';
 FLUSH PRIVILEGES;
 EOF
 
-chmod 777 /scripts/init.sql
+#chmod 777 /scripts/init.sql
 # Execute MariaDB
 # https://mariadb.com/kb/en/mysqld_safe/
-mysqld_safe --defaults-file="/scripts/init.sql" --user=mysql --datadir="/var/lib/mysql" --init-file="/scripts/init.sql"
+mysqld_safe --defaults-file="/etc/mysql/my.cnf" --user=mysql --datadir="/var/lib/mysql" --init-file="/scripts/init.sql"
