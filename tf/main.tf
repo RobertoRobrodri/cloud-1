@@ -49,6 +49,23 @@ resource "google_compute_instance" "cloud_one_vm" {
     depends_on = [ resource.google_storage_bucket_object.inception_files ]
 }
 
+# DNS
+
+resource "google_dns_managed_zone" "cloud-one-domain" {
+  name     = "cloud-one"
+  dns_name = var.dns_name
+}
+
+resource "google_dns_record_set" "cloud-one-record" {
+  name = "test.${google_dns_managed_zone.cloud-one-domain.dns_name}."
+  type = "A"
+  ttl  = 300
+
+  managed_zone = google_dns_managed_zone.cloud-one-domain.name
+
+  rrdatas = [google_compute_instance.cloud_one_vm.network_interface[0].access_config[0].nat_ip]
+}
+
 # Cloud storage bucket 
 
 ## Dont event need this this with file provisioner
