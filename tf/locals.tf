@@ -2,8 +2,8 @@
 #                                LOCALS                                     #
 #############################################################################
 locals {
-    region = "europe-west1"
-    zone   = "europe-west1-b"
-    project_id = "ply-platform-353b"
-    source_dir = "../srcs"
+  region     = "europe-west1"
+  zone       = "europe-west1-b"
+  project_id = "sanguine-line-428613-m2"
+  source_dir = "../srcs"
 }

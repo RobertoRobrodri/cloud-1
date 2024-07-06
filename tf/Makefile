@@ -3,7 +3,7 @@ TF_ENV_PATH := "$(HOME)/.tfenv"
 TF_VERSION := $(file < .terraform_version)
 TF_PATH := $(TF_ENV_PATH)/versions/$(TF_VERSION)
 TF_ENV := $(TF_ENV_PATH)/bin/tfenv
-TERRAFORM := $(TERRAFORM)
+TERRAFORM := $(TF_PATH)/terraform
 
 usage:
 	@echo "Setup: Install tfenv"
@@ -26,7 +26,7 @@ uninstall:
 	@$(TF_ENV) uninstall $(TF_VERSION)
 
 init: install
-	@$(TERRAFORM) init
+	$(TERRAFORM) init
 
 plan: init format
 	@$(TERRAFORM) plan

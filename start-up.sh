@@ -34,10 +34,10 @@ curl -L "https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_V
 chmod +x /usr/local/bin/docker-compose >> logs.txt
 
 # Copy files from Google Cloud Storage bucket
-gsutil -m cp -r gs://inception-ply-platform-353b/ . >> logs.txt
+gsutil -m cp -r gs://inception-sanguine-line-428613-m2/ . >> logs.txt
 
 # Change directory to the copied files location
-cd inception-ply-platform-353b/ >> logs.txt
+cd inception-sanguine-line-428613-m2/ >> logs.txt
 
 # # Run make command
 make >> logs.txt
