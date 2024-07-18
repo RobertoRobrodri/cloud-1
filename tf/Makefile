@@ -14,6 +14,13 @@ usage:
 	@echo "Apply: Terraform apply"
 	@echo "Destroy: Terraform destroy"
 
+# auth:
+# 	curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz
+# 	tar -xf google-cloud-cli-linux-x86_64.tar.gz
+# 	./google-cloud-sdk/install.sh
+# 	./google-cloud-sdk/bin/gcloud init
+# 	./google-cloud-sdk/bin/gcloud auth
+
 setup:
 	@if [ ! -d $(TF_ENV_PATH) ]; then \
 		git clone --depth=1 $(TF_REPO) ~/.tfenv; \
