@@ -68,8 +68,8 @@ services:
   phpmyadmin:
     container_name: phpmyadmin
     build: ./requirements/phpmyadmin
-    ports:
-      - "8080:80"
+#    ports:
+#      - "8080:80"
     depends_on:
       - mariadb
     networks:

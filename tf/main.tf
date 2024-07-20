@@ -100,7 +100,7 @@ resource "google_compute_firewall" "cloud-one-access" {
 
   allow {
     protocol = "tcp"
-    ports    = ["443"]
+    ports    = ["443", "80"]
   }
   priority      = 0
   source_ranges = ["0.0.0.0/0"]

@@ -38,6 +38,7 @@ gsutil -m cp -r gs://inception-sanguine-line-428613-m2/ . >> logs.txt
 
 # Change directory to the copied files location
 cd inception-sanguine-line-428613-m2/ >> logs.txt
-
+PUBLIC_IP=$(curl -s https://api.ipify.org)
+sed -i "s/localhost/$PUBLIC_IP/g" .env
 # # Run make command
 make >> logs.txt
