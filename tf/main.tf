@@ -15,7 +15,7 @@ resource "google_storage_bucket_iam_member" "cloud_one_permission" {
 }
 
 resource "google_compute_instance" "cloud_one_vm" {
-  name = "cloud-1"
+  name = var.vm_name
   zone = local.zone
 
   machine_type = "n2-standard-2"
